@@ -196,6 +196,7 @@
             this.Controls.Add(this.titleLabel);
             this.Name = "mainForm";
             this.Text = "Add/Delete";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
