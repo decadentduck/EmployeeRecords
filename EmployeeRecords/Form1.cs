@@ -113,9 +113,15 @@ namespace EmployeeRecords
 
         public void loadDB()
         {
+
+            string newID, newFirstName, newLastName, newStartDate, newSalary;
+            newID = newFirstName = newLastName = newStartDate = newSalary = "";
+
             // Open the file to be read
             XmlTextReader reader = new XmlTextReader("employees.xml");
-            
+
+            int i = 1;
+
             // Continue to read each element and text until the file is done
             while (reader.Read())
             {
@@ -123,7 +129,18 @@ namespace EmployeeRecords
                 // otherwise the loop repeats getting the next piece of information
                 if (reader.NodeType == XmlNodeType.Text)
                 {
-                    outputLabel.Text += reader.Value + "\n";
+                    if (i == 1) { newID = reader.Value; i++; }
+                    else if (i == 2) { newFirstName = reader.Value; i++; }
+                    else if (i == 3) { newLastName = reader.Value; i++; }
+                    else if (i == 4) { newStartDate = reader.Value; i++; }
+                    else if (i == 5)
+                    {
+                        newSalary = reader.Value;
+                        i = 1;
+                        Employee e = new Employee(newID, newFirstName, newLastName, newStartDate, newSalary);
+                        employeeDB.Add(e);
+                    }
+
                 }
             }
             // When done reading the file close it
